@@ -3,8 +3,6 @@ require_once('../controller/CategoryControllers.php');
 require_once('../config/base_url.php');
 session_id();
 session_start();
-//$data->store();
-//$data->deleteById();
 $data->update();
 ?>
 <!DOCTYPE html>
@@ -49,9 +47,6 @@ $data->update();
                 <ul class="navbar-nav">
                     <li class="nav-item active navigasi mt-1">
                         <a class="btn btn-primary" href="<?= base_url('') ?>"><span class="fa fa-home"></span> Dashboard</a>
-                    </li>
-                    <li class="nav-item navigasi mt-1">
-                        <a class="btn btn-info" href="<?= base_url('views/tambah.php') ?>">Tambah Sparepart</a>
                     </li>
                     <li class="nav-item navigasi mt-1">
                         <a class="btn btn-dark" href="<?= base_url('views/daftar.php') ?>">Daftar Sparepart</a>
