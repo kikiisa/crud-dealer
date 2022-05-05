@@ -1,8 +1,9 @@
 <?php
-
-require_once('config/database.php');
 require_once('config/base_url.php');
+require_once('config/database.php');
+require_once('controller/DashboardControllers.php');
 
+$Dashbaord->db = $db;
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +12,11 @@ require_once('config/base_url.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="public/css/style.css">
-    <link rel="stylesheet" href="public/icon/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= base_url('public/bootstrap/css/bootstrap.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/css/style.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/icon/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/DataTables/datatables.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/DataTables/datatables.min.css') ?>">
     <title>Home</title>
     <style>
         .navbar-nav li a{
@@ -63,7 +66,7 @@ require_once('config/base_url.php');
                     <div class="col-md-6">
                         <div class="card text-white text-center bg-primary mb-3">
                             <div class="card-body">
-                            <h5 class="card-title">Jumlah Sparepart <strong>50</strong></h5>
+                            <h5 class="card-title">Jumlah Stock Sparepart <strong><?= $Dashbaord->jumlah_stock() ?></strong></h5>
                             <i class="fa fa-certificate fa-5x"></i>
                             </div>
                         </div>
@@ -71,8 +74,8 @@ require_once('config/base_url.php');
                     <div class="col-md-6">
                         <div class="card text-white text-center bg-dark mb-3">
                             <div class="card-body">
-                            <h5 class="card-title">Kategory Sparepart <strong>50</strong></h5>
-                            <i class="fa fa-user fa-5x"></i>
+                            <h5 class="card-title">Jumlah Kategory Barang <strong><?= $Dashbaord->category_barang() ?></strong></h5>
+                            <i class="fa fa-gear fa-5x"></i>
                             </div>
                         </div>
                     </div>
@@ -80,8 +83,10 @@ require_once('config/base_url.php');
             </div>
         </div>
     </main>
-    <script src="public/bootstrap/js/jquery-3.1.1.min.js"></script>
-    <script src="public/bootstrap/js/bootstrap.min.js"></script>
-    <script src="public/bootstrap/js/bootstrap.js"></script>
+    <script src="<?= base_url('public/bootstrap/js/jquery-3.1.1.min.js') ?>"></script>
+    <script src="<?= base_url('public/DataTables/datatables.min.js') ?>"></script>
+    <script src="<?= base_url('public/DataTables/datatables.js') ?>"></script>
+    <script src="<?= base_url('public/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= base_url('public/bootstrap/js/bootstrap.js') ?>"></script>
 </body>
 </html>

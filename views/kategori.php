@@ -14,6 +14,8 @@ $data->update();
     <link rel="stylesheet" href="<?= base_url('public/bootstrap/css/bootstrap.css') ?>">
     <link rel="stylesheet" href="<?= base_url('public/css/style.css') ?>">
     <link rel="stylesheet" href="<?= base_url('public/icon/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/DataTables/datatables.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/DataTables/datatables.min.css') ?>">
     <title>Tambah Stock Sparepart</title>
     <style>
         .navbar-nav li a{
@@ -104,7 +106,7 @@ $data->update();
                         <h3>Category Barang</h3>
                         <?php $nomor = 0; ?>
                         <?php if($data->countAll() > 0){ ?>
-                            <table class="table">
+                            <table class="table" >
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -133,8 +135,15 @@ $data->update();
             </div>
         </div>
     </main>
-    <script src="public/bootstrap/js/jquery-3.1.1.min.js"></script>
-    <script src="public/bootstrap/js/bootstrap.min.js"></script>
-    <script src="public/bootstrap/js/bootstrap.js"></script>
+    <script src="<?= base_url('public/bootstrap/js/jquery-3.1.1.min.js') ?>"></script>
+    <script src="<?= base_url('public/DataTables/datatables.min.js') ?>"></script>
+    <script src="<?= base_url('public/DataTables/datatables.js') ?>"></script>
+    <script src="<?= base_url('public/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= base_url('public/bootstrap/js/bootstrap.js') ?>"></script>
+    <script>
+        $(document).ready(function(){
+            $('.table').DataTable();
+        });
+    </script>
 </body>
 </html>

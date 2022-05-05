@@ -17,10 +17,10 @@ if(isset($_GET["edit"]))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url('public/bootstrap/css/bootstrap.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('public/bootstrap/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('public/css/style.css') ?>">
     <link rel="stylesheet" href="<?= base_url('public/icon/css/font-awesome.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('public/toast/jquery.toast.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/DataTables/datatables.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/DataTables/datatables.min.css') ?>">
     <title>Daftar Stock Sparepart</title>
     <style>
         .navbar-nav li a{
@@ -130,7 +130,7 @@ if(isset($_GET["edit"]))
                                                 <p class="card-text">Total Harga : <strong><?php echo rupiah($get->qty * $get->het) ?></strong></p>
                                             </div>
                                             <div class="col-md-4">
-                                                <button name="save" class="btn btn-primary">Update <i class="fa fa-save"></i></button>
+                                                <button name="update" class="btn btn-primary">Update <i class="fa fa-save"></i></button>
                                                 <a href="../views/daftar.php" class="btn btn-success">Kembali <i class="fa fa-arrow-right"></i></a>
                                             </div>
                                         </div>
@@ -220,28 +220,46 @@ if(isset($_GET["edit"]))
                     <div class="card-body">
                         <h3>Daftar Stock Sparepart</h3>
                         <?php if($countStock > 0){ ?>
-                            <table class="table">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Kode Part</th>
-                                    <th>Deskripsi Stock</th>
-                                    <th>Qty</th>
-                                    <th>Total Harga</th>
-                                    <th>Aksi</th>
-                                </tr>
-                                <?php while($get = mysqli_fetch_object($getStock)){ ?>
+                            <table class="table" id="datatablesSimple">
+                                <thead>
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td><?= $get->kode_part ?></td>
-                                        <td><?= $get->deskripsi ?></td>
-                                        <td><?= $get->qty ?></td>
-                                        <td><?= rupiah($get->qty * $get->het) ?></td>
-                                        <td>
-                                            <a href="../controller/StockControllers.php?hapus=<?=$get->id ?>" class="btn btn-danger"><i class="fa fa-trash fa-1x"></i></a>
-                                            <a href="../views/daftar.php?edit=<?= $get->id ?>" class="btn btn-warning"><i class=" fa fa-pencil-square-o  fa-1x"></i></a>
-                                        </td>
+                                        <th>#</th>
+                                        <th>Kode Part</th>
+                                        <th>Deskripsi Stock</th>
+                                        <th>Qty</th>
+                                        <th>Total Harga</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                <?php } ?>
+                                </thead>
+                                <tbody>
+                                    <?php $nomor = 0; ?>
+                                    <?php $subTotal = 0?>
+                                    <?php while($get = mysqli_fetch_object($getStock)){ ?>
+                                        <tr>
+                                            <th scope="row"><?php echo $nomor+=1; ?></th>
+                                            <td><?= $get->kode_part ?></td>
+                                            <td><?= $get->deskripsi ?></td>
+                                            <td><?= $get->qty ?></td>
+                                            <td><?= rupiah($get->qty * $get->het) ?></td>
+                                            <td>
+                                                <a href="../controller/StockControllers.php?hapus=<?=$get->id ?>" class="btn btn-danger"><i class="fa fa-trash fa-1x"></i></a>
+                                                <a href="../views/daftar.php?edit=<?= $get->id ?>" class="btn btn-warning"><i class=" fa fa-pencil-square-o  fa-1x"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php 
+                                            $sub = $get->qty * $get->het;
+                                            $subTotal+=$sub;
+                                        ?>
+                                    <?php } ?>
+                                        <tr>
+                                            <td rowspan="5">Sub Total : <strong><?= rupiah($subTotal) ?></strong></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                </tbody>
                             </table>
                         <?php }else{ ?>
                             <div class="alert alert-danger">Maaf data Stock masih kosong</div>
@@ -252,8 +270,14 @@ if(isset($_GET["edit"]))
         </div>
     </main>
     <script src="<?= base_url('public/bootstrap/js/jquery-3.1.1.min.js') ?>"></script>
+    <script src="<?= base_url('public/DataTables/datatables.min.js') ?>"></script>
+    <script src="<?= base_url('public/DataTables/datatables.js') ?>"></script>
     <script src="<?= base_url('public/bootstrap/js/bootstrap.min.js') ?>"></script>
     <script src="<?= base_url('public/bootstrap/js/bootstrap.js') ?>"></script>
-    <script src="<?= base_url('public/toast/jquery.toast.min.js') ?>"></script>
+    <script>
+        $(document).ready(function(){
+            $('#datatablesSimple').DataTable();
+        });
+    </script>
 </body>
 </html>

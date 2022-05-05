@@ -85,7 +85,7 @@ class StockControllers
     public function update()
     {
         global $db;
-        if(isset($_POST["save"]))
+        if(isset($_POST["update"]))
         {
             session_id();
             session_start();
